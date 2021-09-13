@@ -5,9 +5,7 @@
   connection: ansible.netcommon.network_cli
   vars:
     ansible_network_os: ios
-    report_format: csv
-    ping_result:
-      rc: 0
+    report_format: txt
   collections:
     - cisco.ios
 
