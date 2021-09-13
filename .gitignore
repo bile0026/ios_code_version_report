@@ -1,3 +1,8 @@
+.devcontainer
+*.txt
+*.csv
+ansible.cfg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

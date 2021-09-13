@@ -1,0 +1,8 @@
+host,ios_type,ios_version,ios_image
+{% for host in play_hosts %}
+{% if ping_result.rc == 0 %}
+{{ host }},{{ hostvars[host]['ansible_net_iostype'] }},{{ hostvars[host]['ansible_net_version'] }},{{ hostvars[host]['ansible_net_image'] }}
+{% else %}
+{{ host }}, Problem reading serial number (possible host offline),,
+{% endif %}
+{% endfor %}

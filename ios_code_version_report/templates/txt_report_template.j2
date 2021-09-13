@@ -1,0 +1,15 @@
+{% for host in play_hosts %}
+{% if ping_result.rc == 0 %}
+{{ host }}:
+IOS Type: {{ hostvars[host]['ansible_net_iostype'] }}
+IOS Version: {{ hostvars[host]['ansible_net_version'] }}
+IOS Image: {{ hostvars[host]['ansible_net_image'] }}
+
+--------------------------------------------------------------------
+{% else %}
+{{ host }}:
+Serial Number: Problem reading serial number (possible host offline)
+
+--------------------------------------------------------------------
+{% endif %}
+{% endfor %}

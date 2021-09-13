@@ -1,0 +1,24 @@
+---
+- name: Gather Facts from Cisco Devices
+  hosts: all
+  gather_facts: false
+  connection: ansible.netcommon.network_cli
+  vars:
+    ansible_network_os: ios
+    report_format: csv
+    ping_result:
+      rc: 0
+  collections:
+    - cisco.ios
+
+  tasks:
+    # - name: Ping for reachability
+    #   ansible.builtin.command: ping -c2 {{ inventory_hostname }}
+    #   delegate_to: localhost
+    #   register: ping_result
+    #   ignore_errors: true
+    #   check_mode: false
+
+    - name: Import ios_code_version_report role
+      import_role:
+        name: ios_code_version_report

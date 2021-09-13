@@ -1,0 +1,41 @@
+---
+# tasks file for ios_code_version_report
+
+- name: Gather device information
+  ios_facts:
+    gather_subset: min
+  register: ios_facts
+  when: ping_result.rc == 0
+
+- name: Generate txt report file
+  local_action: template src=templates/txt_report_template.j2 dest=/tmp/Cisco_ios_code_version_report.txt
+  when: report_format == 'txt'
+  run_once: true
+  check_mode: false
+
+- name: Generate csv report file
+  local_action: template src=templates/csv_report_template.j2 dest=/tmp/Cisco_ios_code_version_report.csv
+  when: report_format == 'csv'
+  run_once: true
+  check_mode: false
+
+- name: Email Code Version Report
+  mail:
+    from: "{{ from_email }}"
+    to: "{{ email_address }}"
+    subject: Serial Number Report for "{{ lookup('pipe','date +%Y-%m-%d') }}"
+    subtype: html
+    attach: /tmp/Cisco_ios_code_version_report.{{ report_format }}
+    host: "{{ smtp_server }}"
+    body:
+  delegate_to: localhost
+  run_once: true
+  check_mode: false
+
+- name: Cleanup reports
+  file:
+    path: /tmp/Cisco_ios_code_version_report.{{ report_format }}
+    state: absent
+  delegate_to: localhost
+  run_once: true
+  check_mode: false
