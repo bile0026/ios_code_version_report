@@ -12,12 +12,12 @@
     - cisco.ios
 
   tasks:
-    # - name: Ping for reachability
-    #   ansible.builtin.command: ping -c2 {{ inventory_hostname }}
-    #   delegate_to: localhost
-    #   register: ping_result
-    #   ignore_errors: true
-    #   check_mode: false
+    - name: Ping for reachability
+      ansible.builtin.command: ping -c2 {{ inventory_hostname }}
+      delegate_to: localhost
+      register: ping_result
+      ignore_errors: true
+      check_mode: false
 
     - name: Import ios_code_version_report role
       import_role:
