@@ -3,7 +3,9 @@
 {{ host }}:
 IOS Type: {{ hostvars[host]['ansible_net_iostype'] }}
 IOS Version: {{ hostvars[host]['ansible_net_version'] }}
+{% if hostvars[host]['ansible_net_image'] is defined %}
 IOS Image: {{ hostvars[host]['ansible_net_image'] }}
+{% endif %}
 
 --------------------------------------------------------------------
 {% else %}
