@@ -10,12 +10,14 @@
 - name: Generate txt report file
   local_action: template src=templates/txt_report_template.j2 dest=/tmp/Cisco_ios_code_version_report.txt
   when: report_format == 'txt'
+  delegate_to: localhost
   run_once: true
   check_mode: false
 
 - name: Generate csv report file
   local_action: template src=templates/csv_report_template.j2 dest=/tmp/Cisco_ios_code_version_report.csv
   when: report_format == 'csv'
+  delegate_to: localhost
   run_once: true
   check_mode: false
 
