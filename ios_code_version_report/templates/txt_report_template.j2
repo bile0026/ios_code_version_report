@@ -1,16 +1,26 @@
 {% for host in play_hosts %}
 {% if ping_result.rc == 0 %}
 {{ host }}:
+{% if hostvars[host]['ansible_net_iostype'] is defined %}
 IOS Type: {{ hostvars[host]['ansible_net_iostype'] }}
+{% else %}
+IOS Type: Could not find value
+{% endif %}
+{% if hostvars[host]['ansible_net_version'] is defined %}
 IOS Version: {{ hostvars[host]['ansible_net_version'] }}
+{% else %}
+IOS Version: Could not find value
+{% endif %}
 {% if hostvars[host]['ansible_net_image'] is defined %}
 IOS Image: {{ hostvars[host]['ansible_net_image'] }}
+{% else %}
+IOS Image: Could not find value
 {% endif %}
 
 --------------------------------------------------------------------
 {% else %}
 {{ host }}:
-Serial Number: Problem reading serial number (possible host offline)
+Serial Number: Problem reading information (possible host offline)
 
 --------------------------------------------------------------------
 {% endif %}
