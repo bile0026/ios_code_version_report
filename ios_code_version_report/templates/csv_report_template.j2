@@ -1,7 +1,7 @@
 host,ios_type,ios_version,ios_image
 {% for host in play_hosts %}
 {% if ping_result.rc == 0 %}
-{{ host }},{% if hostvars[host]['ansible_net_iostype'] is defined %}{{ hostvars[host]['ansible_net_iostype'] }}{% endif %},{% if hostvars[host]['ansible_net_version'] is defined%}{{ hostvars[host]['ansible_net_version'] }}{% endif %},{% if hostvars[host]['ansible_net_image'] is defined %}{{ hostvars[host]['ansible_net_image'] }}{% endif %}\n
+{{ host }},{% if hostvars[host]['ansible_net_iostype'] is defined %}{{ hostvars[host]['ansible_net_iostype'] }}{% endif %},{% if hostvars[host]['ansible_net_version'] is defined%}{{ hostvars[host]['ansible_net_version'] }}{% endif %},{% if hostvars[host]['ansible_net_image'] is defined %}{{ hostvars[host]['ansible_net_image'] }}{% endif %}
 {% else %}
 {{ host }}, Problem reading values (possible host offline),,
 {% endif %}
